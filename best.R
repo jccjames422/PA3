@@ -31,13 +31,12 @@ best <- function(state, outcome) {
     selection <- 23
   }
   
-  
   chosen.outcome <- selected.state[, c(2, selection)]
   
   ## scrub na's out of the data
   
-  out <- complete.cases(chosen.outcome)
-  chosen.outcome <- chosen.outcome[out, ]
+  keeprows <- complete.cases(chosen.outcome)
+  chosen.outcome <- chosen.outcome[keeprows, ]
   
   ## return the name(s) of the hospital(s) with the lowest value in the column
   hospitals <- chosen.outcome[chosen.outcome[[2]] == min(chosen.outcome[[2]]), 1]
