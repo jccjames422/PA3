@@ -15,6 +15,8 @@ rankhospital <- function(state, outcome, num = "best") {
   } else if (!num %in% c('best', 'worst')) {
     if (!is.integer(as.integer(num))) {
       stop('invalid num')
+    } else if (as.integer(num) > nrow(tdata)) {
+      return(NA)
     }
   }
   
@@ -48,7 +50,8 @@ rankhospital <- function(state, outcome, num = "best") {
   ## create a data frame with Hospital Name, State, and 30-day death rate, and rank
   
   debug.result <- data.frame(debug.result[[1]], state, 
-                             debug.result[[2]], c(1:nrow(debug.result)))
+                             debug.result[[2]], c(1:nrow(debug.result)),
+                             stringsAsFactors = FALSE)
   names(debug.result) <- c('Hospital.Name', 'State', 'Result', 'Rank')
   
   dr <- debug.result
