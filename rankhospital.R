@@ -51,8 +51,16 @@ rankhospital <- function(state, outcome, num = "best") {
                              debug.result[[2]], c(1:nrow(debug.result)))
   names(debug.result) <- c('Hospital.Name', 'State', 'Result', 'Rank')
   
-  debug.result
+  dr <- debug.result
   
   ## Return hospital name in that state with the given rank
   ## 30-day death rate
+  
+  if (num == 'best') {
+    return(dr[dr$Rank == min(dr$Rank), ])
+  } else if (num == 'worst') {
+    return(dr[dr$Rank == max(dr$Rank), ])
+  } else {
+    return(dr[dr$Rank == num, ])
+  }
 }
