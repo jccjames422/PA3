@@ -15,14 +15,16 @@ rankhospital <- function(state, outcome, num = "best") {
   } else if (!num %in% c('best', 'worst')) {
     if (!is.integer(as.integer(num))) {
       stop('invalid num')
-    } else if (as.integer(num) > nrow(tdata)) {
-      return(NA)
     }
   }
   
   ## subset tdata frame matching only those rows with the selected state
   
   selected.state <- tdata[tdata$State == state, ]
+  
+  if (as.integer(num) > nrow(selected.state)) {
+    return(NA)
+  }
   
   ## select hospital name and outcome columns
   
@@ -68,6 +70,6 @@ rankhospital <- function(state, outcome, num = "best") {
   }
   
   ## return hospital name
-  
+
   result[[1]]
 }
