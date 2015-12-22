@@ -13,7 +13,7 @@ rankhospital <- function(state, outcome, num = "best") {
   } else if (!outcome %in% c('heart attack', 'heart failure', 'pneumonia')) {
     stop('invalid outcome')
   } else if (!num %in% c('best', 'worst')) {
-    if (!is.integer(num)) {
+    if (!is.integer(as.integer(num))) {
       stop('invalid num')
     }
   }
