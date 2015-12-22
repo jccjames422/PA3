@@ -6,12 +6,16 @@ rankhospital <- function(state, outcome, num = "best") {
   suppressWarnings(tdata[, 17] <- as.numeric(tdata[, 17]))
   suppressWarnings(tdata[, 23] <- as.numeric(tdata[, 23]))
   
-  ## Check that state and outcome are valid
+  ## Check that state, outcome, and num are valid
   states <- unique(tdata$State)
   if (!state %in% states) {
     stop('invalid state')
   } else if (!outcome %in% c('heart attack', 'heart failure', 'pneumonia')) {
     stop('invalid outcome')
+  } else if (!num %in% c('best', 'worst')) {
+    if (!is.integer(num)) {
+      stop('invalid num')
+    }
   }
   
   ## Return hospital name in that state with the given rank
