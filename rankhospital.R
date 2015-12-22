@@ -45,9 +45,13 @@ rankhospital <- function(state, outcome, num = "best") {
   
   debug.result <- chosen.outcome
   
-  debug.result
+  ## create a data frame with Hospital Name, State, and 30-day death rate, and rank
   
-  ## create a data frame with Hospital Name, State, and 30-day death rate
+  debug.result <- data.frame(debug.result[[1]], state, 
+                             debug.result[[2]], c(1:nrow(debug.result)))
+  names(debug.result) <- c('Hospital.Name', 'State', 'Result', 'Rank')
+  
+  debug.result
   
   ## Return hospital name in that state with the given rank
   ## 30-day death rate
