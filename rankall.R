@@ -75,7 +75,7 @@ rankall <- function(outcome, num = "best") {
                         if (num > max(x[[4]])) {
                                 result <- NA
                         } else {
-                               ## return the selected row
+                                ## return the selected row
                                 result <- x[num, ]
                         }
                 }
