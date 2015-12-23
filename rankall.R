@@ -73,7 +73,9 @@ rankall <- function(outcome, num = "best") {
                         result <- x[max(x[[4]]), ]
                 } else {
                         if (num > max(x[[4]])) {
-                                result <- NA
+                                result <- data.frame(NA, x[1,2], NA, NA)
+                                names(result) <- c('Hospital.Name', 'State',
+                                                   'Result', 'Rank')
                         } else {
                                 ## return the selected row
                                 result <- x[num, ]
@@ -82,5 +84,17 @@ rankall <- function(outcome, num = "best") {
                 result
         })
         
-        final.result
+        
+        
+        ## now we need to change the data type of the final.result from a list
+        ## of data frames, to each element of the list to be its own row in
+        ## a single data frame.
+        
+
+        tmp.result <- data.frame()
+        lapply(final.result, function(x) {
+                tmp.result <<- rbind(tmp.result, x)     
+        })
+        
+        tmp.result
 }
