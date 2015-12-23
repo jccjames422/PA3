@@ -37,21 +37,33 @@ rankall <- function(outcome, num = "best") {
         ##this returns a list of data frames broken up by state
         split.by.state <- split(chosen.outcome, chosen.outcome$state)
         
-        ##scrub nas
+        ##scrub nas, for each state
         split.by.state <- lapply(split.by.state, function(x) {
                 
                 keeprows <- complete.cases(x)
                 x <- x[keeprows, ]
         })
         
-        ##sort by rank
+        ##sort by rank, for each state
         split.by.state <- lapply(split.by.state, function(x) {
                 x <- x[ order(x[[2]], x[[1]]), ]
         })
         
-        split.by.state
+        ## the hospital's rank is now the same as the row it is placed in.
+        ## now I will add a new column to each data frame with the actual
+        ## rank of that hospital
         
-        ## rank all hospitals by state
+        debug.result <- lapply(split.by.state, function(x) {
+                dr <- data.frame(x[[1]], x[[3]], x[[2]], c(1:nrow(x)),
+                                 stringsAsFactors = FALSE)
+                names(dr) <- c('Hospital.Name', 'State', 'Result', 'Rank')
+                dr
+        })
+        
+        debug.result
+        
+        
+        
         ## will produce a data frame with hospital, state, and rank as columns
         
         ## For each state, find the hospital of the given rank
