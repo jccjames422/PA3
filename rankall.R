@@ -96,5 +96,11 @@ rankall <- function(outcome, num = "best") {
                 tmp.result <<- rbind(tmp.result, x)     
         })
         
+        ## now drop last two columns
+        
+        tmp.result <- data.frame(tmp.result[[1]], tmp.result[[2]],
+                                 row.names = tmp.result[[2]])
+        names(tmp.result) <- c('hospital', 'state')
+        
         tmp.result
 }
