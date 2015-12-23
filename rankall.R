@@ -60,13 +60,27 @@ rankall <- function(outcome, num = "best") {
                 dr
         })
         
-        debug.result
-        
-        
-        
-        ## will produce a data frame with hospital, state, and rank as columns
-        
         ## For each state, find the hospital of the given rank
         ## Return a data frame with the hospital names and the
         ## (abbreviated) state name
+        
+        final.result <- lapply(debug.result, function(x) {
+                if (num == 'best') {
+                        ## return the first row
+                        result <- x[1, ]
+                } else if (num == 'worst') {
+                        ## return the last row
+                        result <- x[max(x[[4]]), ]
+                } else {
+                        if (num > max(x[[4]])) {
+                                result <- NA
+                        } else {
+                               ## return the selected row
+                                result <- x[num, ]
+                        }
+                }
+                result
+        })
+        
+        final.result
 }
