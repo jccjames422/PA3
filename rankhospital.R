@@ -45,11 +45,13 @@ rankhospital <- function(state, outcome, num = "best") {
   
   ## sort the data frame based on outcome
   
-  chosen.outcome <- chosen.outcome[with(chosen.outcome, order(chosen.outcome[[2]], chosen.outcome[[1]])), ]
+  chosen.outcome <- chosen.outcome[ with(chosen.outcome, 
+                                         order(chosen.outcome[[2]], 
+                                               chosen.outcome[[1]])), ]
   
   debug.result <- chosen.outcome
   
-  ## create a data frame with Hospital Name, State, and 30-day death rate, and rank
+  ## create a data frame with Hospital Name, State, 30-day death rate, and rank
   
   debug.result <- data.frame(debug.result[[1]], state, 
                              debug.result[[2]], c(1:nrow(debug.result)),
