@@ -18,6 +18,9 @@ rankall <- function(outcome, num = "best") {
         #       outcome: must be one of three possible outcomes:  heart attack, 
         #       pneumonia, or heart failure.
         #
+        #       num:  can be "best", "worst", or an integer indiciating the
+        #       desired rank of the hospital
+        #
         # Returns:
         #
         #       A 2-column data frame containing the names of the hospitals that
